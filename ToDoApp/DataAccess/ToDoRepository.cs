@@ -11,7 +11,7 @@ namespace DataAccess
         {
             toDoList = new List<ToDo>();
         }
-        private void AddToDo(int id, string description)
+        public void AddToDo(int id, string description)
         {
             ToDo toDo = new ToDo();
 
@@ -22,16 +22,14 @@ namespace DataAccess
 
             toDoList.Add(toDo);
         }
-        private void DeleteToDo(int id, string description, DateTime deletedTime)
+        public void DeleteToDo(int id)
         {
-            ToDo toDo = new ToDo();
-            toDo.Id = id;
-            toDo.Description = description;
-            deletedTime = DateTime.Now;
-            toDo.DeletedTime = deletedTime;
+            //??
+            ToDo toDo = FindWithId(id);
             toDoList.Remove(toDo);
+            Console.WriteLine("Kayıt silindi");
         }
-        private ToDo FindWithId(int id)
+        public ToDo FindWithId(int id)
         {
             foreach (var toDo in toDoList)
             {
@@ -39,36 +37,54 @@ namespace DataAccess
                 {
                     return toDo;
                 }
-            }
-            return null;
-        }
-        private ToDo AllToDo(int id)
-        {
-            foreach (var toDo in toDoList)
-            {
-                return toDo;
-            }
-            return null;
-        }
-        private ToDo FindToDo(int id, string description, DateTime createdTime)
-        {
-            foreach (var toDo in toDoList)
-            {
-                if (toDo.Id == id || toDo.Description == description || toDo.CreatedTime == createdTime)
+                else
                 {
-                    return toDo;
+                    Console.WriteLine("Kayıt bulunamadı");
                 }
             }
             return null;
         }
-        private void UpdateToDo(int id, string description, DateTime createdTime)
+        public List<ToDo> AllToDo()
+        {
+            if (toDoList != null)
+            {
+                return toDoList;
+            }
+            else
+            {
+
+                return null;
+            }
+        }
+        public ToDo FindToDo(int id, string description)
+        {
+            foreach (var toDo in toDoList)
+            {
+                if (toDo.Id == id || toDo.Description == description)
+                {
+                    return toDo;
+                }
+                else
+                {
+                    Console.WriteLine("Kayıt bulunamadı");
+                }
+            }
+            return null;
+        }
+        public void UpdateToDo(int id, string description, DateTime createdTime)
         {
             foreach (var toDo in toDoList)
             {
                 if (toDo.Id == id || toDo.CreatedTime == createdTime)
                 {
-                    toDoList.Remove(toDo);
-                    AddToDo(id, description);
+                    toDo.Id = id;
+                    toDo.Description = description;
+                    toDo.CreatedTime = createdTime;
+                    //toDoList.Remove(toDo);
+                    //AddToDo(id, description);
+                    Console.WriteLine("güncellendi");
+                    break;
+                    return;
                 }
             }
         }
