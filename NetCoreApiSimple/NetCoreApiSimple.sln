@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreApiSimple", "NetCoreApiSimple\NetCoreApiSimple.csproj", "{34DD21A2-4800-4284-B64F-0B99713A8E3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34DD21A2-4800-4284-B64F-0B99713A8E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34DD21A2-4800-4284-B64F-0B99713A8E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34DD21A2-4800-4284-B64F-0B99713A8E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34DD21A2-4800-4284-B64F-0B99713A8E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0419609C-3F02-488D-BD28-5E35A6F750DD}
+	EndGlobalSection
+EndGlobal

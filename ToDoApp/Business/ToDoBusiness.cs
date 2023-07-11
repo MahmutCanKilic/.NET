@@ -22,7 +22,7 @@ namespace Business
         {
            return repository.FindWithId(id);
         }
-        public List<ToDo> All()
+        public IEnumerable<ToDo> All()
         {
              return repository.AllToDo();
         }
@@ -30,9 +30,13 @@ namespace Business
         {
           return repository.FindToDo(id, description);
         }
-        public void Update(int id, string description, DateTime createdTime)
+        public void Update(int id,string description)
         {
-            repository.UpdateToDo(id, description, createdTime);
+            repository.UpdateToDo(id, description);
+        }
+        public void UpdateAll(List<ToDo> toDoList)
+        {
+            repository.UpdateAllToDo(toDoList);
         }
     }
 }

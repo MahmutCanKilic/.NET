@@ -84,7 +84,7 @@ namespace ToDoConsole
                             if (toDo.Id == int.Parse(Console.ReadLine()))
                             {
                                 Console.WriteLine("kayıt bulundu. Yeni Id giriniz.");
-                                doBusiness.Update(int.Parse(Console.ReadLine()), toDo.Description, toDo.CreatedTime);
+                                doBusiness.Update(int.Parse(Console.ReadLine()), toDo.Description);
                                 Console.WriteLine("yeni kayıt: " + toDo.Id + " " + toDo.Description + " " + toDo.CreatedTime);
                             }
                             else

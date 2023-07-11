@@ -13,14 +13,14 @@ namespace DataAccess
         }
         public void AddToDo(int id, string description)
         {
-            ToDo toDo = new ToDo();
 
+            ToDo toDo = new ToDo();
             toDo.Id = id;
             toDo.Description = description;
-            DateTime createdTime = DateTime.Now;
-            toDo.CreatedTime = createdTime;
+            toDo.CreatedTime = DateTime.Now;
 
             toDoList.Add(toDo);
+
         }
         public void DeleteToDo(int id)
         {
@@ -39,12 +39,13 @@ namespace DataAccess
                 }
                 else
                 {
+
                     Console.WriteLine("Kayıt bulunamadı");
                 }
             }
             return null;
         }
-        public List<ToDo> AllToDo()
+        public IEnumerable<ToDo> AllToDo()
         {
             if (toDoList != null)
             {
@@ -71,21 +72,35 @@ namespace DataAccess
             }
             return null;
         }
-        public void UpdateToDo(int id, string description, DateTime createdTime)
+        public void UpdateToDo(int id, string description)
         {
             foreach (var toDo in toDoList)
             {
-                if (toDo.Id == id || toDo.CreatedTime == createdTime)
+                if (FindWithId(id) != null)
                 {
-                    toDo.Id = id;
+
                     toDo.Description = description;
-                    toDo.CreatedTime = createdTime;
-                    //toDoList.Remove(toDo);
-                    //AddToDo(id, description);
+                    toDo.CreatedTime = DateTime.Now;
                     Console.WriteLine("güncellendi");
                     break;
                     return;
                 }
+                else
+                {
+                    AddToDo(id, description);
+                    break;
+                }
+            }
+        }
+
+        public void UpdateAllToDo(List<ToDo> toDoListNew)
+        {
+
+            for (int i = 0; i < toDoListNew.Count; i++)
+            {
+                toDoList[i].Id = toDoListNew[i].Id;
+                toDoList[i].Description = toDoListNew[i].Description;
+                toDoListNew[i].CreatedTime = DateTime.Now;
             }
         }
     }
