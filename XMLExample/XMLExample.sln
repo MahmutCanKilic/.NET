@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLExample", "XMLExample\XMLExample.csproj", "{D1B8F541-51BD-4BA0-84F7-0186480467EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLProps", "XMLProps\XMLProps.csproj", "{8CA422B5-8AF6-4691-BEDD-FA3A75811891}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1B8F541-51BD-4BA0-84F7-0186480467EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B8F541-51BD-4BA0-84F7-0186480467EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B8F541-51BD-4BA0-84F7-0186480467EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B8F541-51BD-4BA0-84F7-0186480467EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CA422B5-8AF6-4691-BEDD-FA3A75811891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA422B5-8AF6-4691-BEDD-FA3A75811891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA422B5-8AF6-4691-BEDD-FA3A75811891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA422B5-8AF6-4691-BEDD-FA3A75811891}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A03507A-A0F3-4474-B36F-CE9053D2BACB}
+	EndGlobalSection
+EndGlobal
