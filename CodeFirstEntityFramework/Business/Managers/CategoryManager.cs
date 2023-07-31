@@ -8,33 +8,36 @@ using System.Threading.Tasks;
 
 namespace Business.Managers
 {
-    public class CategoryManager
+    public class CategoryManager : ICategory
     {
 
-        CategoryRepository categoryRepository;
-        public CategoryManager(CategoryRepository categoryRepository)
+        //CategoryRepository categoryRepository = new();
+        readonly ICategory iCategoryRepository;
+        public CategoryManager(ICategory iCategory)
         {
-            this.categoryRepository = categoryRepository;
+            this.iCategoryRepository = iCategory;
         }
+
         public void Add(Category category)
         {
-            categoryRepository.Add(category);
+            iCategoryRepository.Add(category);
         }
         public void Delete(Category category)
         {
-            categoryRepository.Delete(category);
+            iCategoryRepository.Delete(category);
         }
-        public void Update(Category category)
+        public Category Update(Category category)
         {
-            categoryRepository.Update(category);
+           return iCategoryRepository.Update(category);
         }
         public Category FindWithId(Category category)
         {
-            return categoryRepository.FindWithId(category);
+            return iCategoryRepository.FindWithId(category);
         }
         public IEnumerable<Category> GetAll(Category category)
         {
-            return categoryRepository.GetAll(category);
+            return iCategoryRepository.GetAll(category);
         }
     }
+
 }

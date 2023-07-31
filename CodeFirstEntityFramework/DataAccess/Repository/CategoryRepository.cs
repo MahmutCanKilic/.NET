@@ -9,14 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository
 {
-    public class CategoryRepository : DbContext
+    public class CategoryRepository : DbContext, ICategory
     {
-        Category category;
+        
         MyContext db = new();
-        public CategoryRepository(Category category)
-        {
-            this.category = category;
-        }
+
         public void Add(Category category)
         {
             db.Categories.Add(category);
@@ -42,5 +39,13 @@ namespace DataAccess.Repository
         {
             return db.Categories.AsQueryable();
         }
+    }
+    public interface ICategory
+    {
+        void Add(Category category);
+        void Delete(Category category);
+        Category Update(Category category);
+        Category FindWithId(Category category);
+        IEnumerable<Category> GetAll(Category category);
     }
 }

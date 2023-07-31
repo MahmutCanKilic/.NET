@@ -1,5 +1,6 @@
 ﻿using Business.Managers;
 using Data.Entity;
+using DataAccess.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,38 +10,38 @@ namespace CodeFirstEntityFramework.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        CategoryManager manager;
+        readonly CategoryManager manager;
         public CategoryController(CategoryManager manager)
         {
             this.manager = manager;
         }
-        [HttpPost]
+        [HttpPost("Add")]
         public IActionResult Add(Category category)
         {
             manager.Add(category);
             return Ok($"{category}  eklendi");
         }
-        [HttpPost]
+        [HttpPost("Delete")]
         public IActionResult Delete(Category category)
         {
             string categoryText = category.ToString();
             manager.Delete(category);
             return Ok(categoryText);
         }
-        [HttpGet]
+        [HttpPost("Find")]
         public IActionResult FindWithId(Category category)
         {
             return Ok(manager.FindWithId(category));
         }
-        [HttpPut]
+        [HttpPut("Update")]
         public IActionResult Update(Category category)
         {
             string categoryText = category.ToString();
             manager.Update(category);
             return Ok($"{categoryText} güncellendi: {category}");
         }
-        [HttpGet]
-        public IActionResult GetAll(Category category)
+        [HttpGet("GetAll")]
+        public IActionResult GetAll([FromBody]Category category)
         {
 
             return Ok(manager.GetAll(category).ToList());

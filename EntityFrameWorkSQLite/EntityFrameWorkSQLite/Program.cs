@@ -1,9 +1,12 @@
 
-using Business.Managers;
+using Business.Manager;
 using Data.Entity;
+using DataAccess.Context;
+using DataAccess.Interfaces;
 using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 
-namespace CodeFirstEntityFramework
+namespace EntityFrameWorkSQLite
 {
     public class Program
     {
@@ -12,10 +15,16 @@ namespace CodeFirstEntityFramework
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            builder.Services.AddScoped<CategoryManager>();
-            builder.Services.AddScoped<ICategory, CategoryRepository>();
+            builder.Services.AddDbContext<MyContext>(c => c.UseSqlite(@"Data Source=C:\Users\P2635\Documents\EFCoreSqliteSample.db"));
+            builder.Services.AddScoped<MyContext>();
+            builder.Services.AddScoped<CarRepository>();
+            builder.Services.AddScoped<BusRepository>();
+            builder.Services.AddScoped<CustomerRepository>();
+            builder.Services.AddScoped<CarManager>();
+            builder.Services.AddScoped<BusManager>();
+            builder.Services.AddScoped<CustomerManager>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
