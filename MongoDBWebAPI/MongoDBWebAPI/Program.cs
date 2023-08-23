@@ -1,5 +1,7 @@
 
 using Data;
+using Data.Entity;
+using DataAccess.Repos;
 using System.Security.Cryptography.X509Certificates;
 
 namespace MongoDBWebAPI
@@ -17,6 +19,8 @@ namespace MongoDBWebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("ProductsDatabase"));
+            builder.Services.AddScoped<DatabaseContext>();
+            builder.Services.AddScoped<ProductRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
