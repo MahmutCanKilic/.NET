@@ -34,9 +34,9 @@ namespace Business.Managers
         {
             return iCategoryRepository.FindWithId(category);
         }
-        public IEnumerable<Category> GetAll(Category category)
+        public IEnumerable<Category> GetAll()
         {
-            return iCategoryRepository.GetAll(category);
+            return iCategoryRepository.GetAll();
         }
     }
 

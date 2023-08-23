@@ -1,8 +1,10 @@
-﻿using Business.Manager;
+﻿using AutoMapper;
+using Business.Manager;
 using Data.Dto;
 using Data.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 
 namespace EntityFrameWorkSQLite.Controllers
 {
@@ -10,89 +12,54 @@ namespace EntityFrameWorkSQLite.Controllers
     [ApiController]
     public class CarController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly CarManager carManager;
-        public CarController(CarManager carManager)
+        public CarController(CarManager carManager, IMapper mapper)
         {
+            this.mapper = mapper;
             this.carManager = carManager;
         }
 
-        [HttpPost("Add")]
+        [HttpPost(nameof(Add))]
         public IActionResult Add(CreateCarDto carDto)
         {
-            Car car = new()
-            {
-                CarType = carDto.CarType,
-                Name = carDto.Name,
-                Price = carDto.Price,
-                speed = carDto.speed,
-                CustomerID = carDto.CustomerID,
-            };
+            Car car = mapper.Map<Car>(carDto);
+
             carManager.Add(car);
             return Ok(carDto);
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete(nameof(Delete))]
         public IActionResult Delete(CreateCarDto carDto)
         {
-            Car car = new()
-            {
-                CarType = carDto.CarType,
-                Name = carDto.Name,
-                Price = carDto.Price,
-                speed = carDto.speed,
-                CustomerID = carDto.CustomerID,
-            };
+            Car car = mapper.Map<Car>(carDto);
             carManager.Delete(car);
             return Ok("silindi");
         }
 
-        [HttpPut("Update")]
+        [HttpPut(nameof(Update))]
         public IActionResult Update(CreateCarDto carDto)
         {
-            Car car = new()
-            {
-                CarType = carDto.CarType,
-                Name = carDto.Name,
-                Price = carDto.Price,
-                speed = carDto.speed,
-                CustomerID = carDto.CustomerID,
-            };
+            Car car = mapper.Map<Car>(carDto);
+
             carManager.Update(car);
             return Ok(carDto);
         }
 
-        [HttpPost("Find")]
+        [HttpPost(nameof(FindWithId))]
         public IActionResult FindWithId(CreateCarDto carDto)
         {
-            Car car = new()
-            {
-                CarType = carDto.CarType,
-                Name = carDto.Name,
-                Price = carDto.Price,
-                speed = carDto.speed,
-                CustomerID = carDto.CustomerID,
-            };
-            carManager.FindWithId(car);
+            Car car = mapper.Map<Car>(carDto);
+            
+            carDto = mapper.Map<CreateCarDto>(carManager.FindWithId(car));
             return Ok(carDto);
         }
 
-        [HttpPost("GetAll")]
+        [HttpGet(nameof(GetAll))]
         public IActionResult GetAll()
         {
-            List<CreateCarDto> carList = new List<CreateCarDto>();
-            foreach (var item in carManager.GetAll().ToList())
-            {
-                CreateCarDto car = new()
-                {
-                    CarType = item.CarType,
-                    Name = item.Name,
-                    Price = item.Price,
-                    speed = item.speed,
-                    CustomerID = item.CustomerID,
-                };
-                carList.Add(car);
+            IEnumerable<CreateCarDto> carList =  carManager.GetAll().Select(x => mapper.Map<CreateCarDto>(x));
 
-            }
             return Ok(carList);
         }
     }

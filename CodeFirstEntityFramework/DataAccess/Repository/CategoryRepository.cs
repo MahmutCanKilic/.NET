@@ -16,6 +16,7 @@ namespace DataAccess.Repository
 
         public void Add(Category category)
         {
+            
             db.Categories.Add(category);
             db.SaveChanges();
         }
@@ -35,7 +36,7 @@ namespace DataAccess.Repository
         {
             return db.Categories.SingleOrDefault(x => x.Id == category.Id);
         }
-        public IEnumerable<Category> GetAll(Category category)
+        public IEnumerable<Category> GetAll()
         {
             return db.Categories.AsQueryable();
         }
@@ -46,6 +47,6 @@ namespace DataAccess.Repository
         void Delete(Category category);
         Category Update(Category category);
         Category FindWithId(Category category);
-        IEnumerable<Category> GetAll(Category category);
+        IEnumerable<Category> GetAll();
     }
 }

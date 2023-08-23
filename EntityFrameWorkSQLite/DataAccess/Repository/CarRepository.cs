@@ -25,7 +25,7 @@ namespace DataAccess.Repository
 
         public Car FindWithId(Car car)
         {
-            return db.Cars.FirstOrDefault(c => c.ID == car.ID);
+            return db.Cars.FirstOrDefault(c => c.CustomerID == car.CustomerID);
         }
 
         public IEnumerable<Car> GetAll()

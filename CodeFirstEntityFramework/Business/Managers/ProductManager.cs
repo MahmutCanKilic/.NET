@@ -12,19 +12,28 @@ namespace Business.Managers
         {
             return repository.Find(product);
         }
-        public void Add(Product product)
+        public async Task Add(Product product)
         {
-            repository.Add(product);
+            await repository.Add(product);
         }
-        public void Delete(Product product)
+        public async Task Delete(Product product)
         {
-            repository.Delete(product);
+            await repository.Delete(product);
         }
-        public void Update(Product product)
+        public async Task UpdateAsync(Product product)
         {
-            repository.Update(product);
+            await repository.UpdateAsync(product);
+            
         }
-        public List<Product> GetAll()
+        public void UpdateOneThread(Product product)
+        {
+            repository.UpdateOneThread(product);
+        }
+        public void UpdateSemaphore(Product product)
+        {
+            repository.UpdateSemaphore(product);
+        }
+        public Task<List<Product>> GetAll()
         {
             return repository.GetAll();
         }

@@ -1,4 +1,5 @@
-﻿using Business.Manager;
+﻿using AutoMapper;
+using Business.Manager;
 using Data.Dto;
 using Data.Entity;
 using Microsoft.AspNetCore.Http;
@@ -10,22 +11,18 @@ namespace EntityFrameWorkSQLite.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private readonly IMapper mapper;
         private readonly CustomerManager customerManager;
-        public CustomerController(CustomerManager customerManager)
+        public CustomerController(CustomerManager customerManager, IMapper mapper)
         {
-                this.customerManager = customerManager;
+            this.mapper = mapper;
+            this.customerManager = customerManager;
         }
 
         [HttpPost(nameof(Add))]
         public IActionResult Add(CreateCustomerDto customerDto)
         {
-            Customer customer = new()
-            {
-                Name = customerDto.Name,
-                Address = customerDto.Address,
-                City = customerDto.City,
-                
-            };
+            Customer customer = mapper.Map<Customer>(customerDto);
             customerManager.Add(customer);
             return Ok(customerDto);
         }
@@ -33,12 +30,8 @@ namespace EntityFrameWorkSQLite.Controllers
         [HttpDelete(nameof(Delete))]
         public IActionResult Delete(CreateCustomerDto customerDto)
         {
-            Customer customer = new()
-            {
-                Name = customerDto.Name,
-                Address = customerDto.Address,
-                City = customerDto.City,
-            };
+            Customer customer = mapper.Map<Customer>(customerDto);
+
             customerManager.Delete(customer);
             return Ok("Deleted");
         }
@@ -46,13 +39,8 @@ namespace EntityFrameWorkSQLite.Controllers
         [HttpPut(nameof(Update))]
         public IActionResult Update(CreateCustomerDto customerDto)
         {
-            Customer customer = new()
-            {
-                Name = customerDto.Name,
-                Address = customerDto.Address,
-                City = customerDto.City,
-                
-            };
+            Customer customer = mapper.Map<Customer>(customerDto);
+
             customerManager.Update(customer);
             return Ok(customerDto);
         }
@@ -60,31 +48,17 @@ namespace EntityFrameWorkSQLite.Controllers
         [HttpPost(nameof(FindWithId))]
         public IActionResult FindWithId(CreateCustomerDto customerDto)
         {
-            Customer customer = new()
-            {
-                Name = customerDto.Name,
-                Address = customerDto.Address,
-                City = customerDto.City,
+            Customer customer = mapper.Map<Customer>(customerDto);
 
-            };
-            customerManager.FindWithId(customer);
-            return Ok(customer);
+            customerDto = mapper.Map<CreateCustomerDto>(customerManager.FindWithId(customer));
+            return Ok(customerDto);
         }
 
         [HttpGet(nameof(GetAll))]
         public IActionResult GetAll()
         {
-            List<CreateCustomerDto> customerList = new List<CreateCustomerDto>();
-            foreach (var item in customerManager.GetAll().ToList())
-            {
-                CreateCustomerDto customerDto = new()
-                {
-                    Name = item.Name,
-                    Address = item.Address,
-                    City = item.City,
-                };
-                customerList.Add(customerDto);
-            }
+            IEnumerable<CreateCustomerDto> customerList = customerManager.GetAll()
+                        .Select(customer => mapper.Map<CreateCustomerDto>(customer));
 
             return Ok(customerList);
         }

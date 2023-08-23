@@ -1,4 +1,5 @@
-﻿using Business.Manager;
+﻿using AutoMapper;
+using Business.Manager;
 using Data.Dto;
 using Data.Entity;
 using DataAccess.Interfaces;
@@ -14,81 +15,51 @@ namespace EntityFrameWorkSQLite.Controllers
     public class BusController : ControllerBase
     {
         private readonly BusManager busManager;
-        public BusController(BusManager busManager)
+        private readonly IMapper mapper;
+        public BusController(BusManager busManager, IMapper mapper)
         {
             this.busManager = busManager;
+            this.mapper = mapper;
         }
 
-        [HttpPost("Add")]
-        public IActionResult Add(CreateBusDto bus)
+        [HttpPost(nameof(Add))]
+        public IActionResult Add(CreateBusDto busDto)
         {
-            Bus newBus = new Bus
-            {
-                CustomerID = bus.CustomerID,
-                Brand = bus.Brand,
-                Name = bus.Name,
-                Price = bus.Price
-            };
-            busManager.Add(newBus);
-            return Ok(bus);
+            Bus bus = mapper.Map<Bus>(busDto);
+            busManager.Add(bus);
+            return Ok("eklendi");
         }
 
-        [HttpDelete("Delete")]
-        public IActionResult Delete(Bus bus)
+        [HttpDelete(nameof(Delete))]
+        public IActionResult Delete(CreateBusDto busDto)
         {
+            Bus bus = mapper.Map<Bus>(busDto);
             busManager.Delete(bus);
+            return Ok("silindi");
+        }
+
+        [HttpPut(nameof(Update))]
+        public IActionResult Update(CreateBusDto busDto)
+        {
+            Bus bus = mapper.Map<Bus>(busDto);
+            busManager.Update(bus);
             return Ok(bus);
         }
 
-        [HttpPut("Update")]
-        public IActionResult Update(CreateBusDto bus)
+        [HttpPost(nameof(FindWithId))]
+        public IActionResult FindWithId(CreateBusDto busBto)
         {
-            Bus newBus = new Bus
-            {
-                CustomerID = bus.CustomerID,
-                Brand = bus.Brand,
-                Name = bus.Name,
-                Price = bus.Price
-            };
-            busManager.Update(newBus);
-            return Ok("güncellendi");
+            Bus bus = mapper.Map<Bus>(busBto);
+
+            Bus findedBus = busManager.FindWithId(bus);
+            busBto = mapper.Map<CreateBusDto>(findedBus);
+            return Ok(busBto);
         }
 
-        [HttpPost("Find")]
-        public IActionResult FindWithId(CreateBusDto bus)
-        {
-            Bus newBus = new Bus
-            {
-                CustomerID = bus.CustomerID,
-                Brand = bus.Brand,
-                Name = bus.Name,
-                Price = bus.Price
-            };
-            CreateBusDto busDto = new CreateBusDto();
-            busDto.CustomerID = newBus.CustomerID;
-            busDto.Brand = newBus.Brand;
-            busDto.Name = newBus.Name;
-            busDto.Price = newBus.Price;
-            busManager.FindWithId(newBus);
-
-            return Ok(busDto);
-        }
-
-        [HttpPost("GetAll")]
+        [HttpGet(nameof(GetAll))]
         public IActionResult GetAll()
         {
-            List<CreateBusDto> busList = new List<CreateBusDto>();
-            foreach (var item in busManager.GetAll().ToList())
-            {
-                CreateBusDto busDto = new()
-                {
-                    Brand = item.Brand
-                    , Name = item.Name
-                    , Price = item.Price
-                    , CustomerID = item.CustomerID
-                };
-                busList.Add(busDto);
-            }
+            IEnumerable<CreateBusDto> busList = busManager.GetAll().Select(x => mapper.Map<CreateBusDto>(x));
             return Ok(busList);
         }
     }

@@ -28,10 +28,22 @@ namespace CodeFirstEntityFramework.Controllers
             productManager.Delete(product);
             return Ok(productText);
         }
-        [HttpPut("Update")]
-        public IActionResult Update(Product product)
+        [HttpPut("UpdateSemaphore")]
+        public IActionResult UpdateSemaphore(Product product)
         {
-            productManager.Update(product);
+            productManager.UpdateSemaphore(product);
+            return Ok($"{product} -> güncel product");
+        }
+        [HttpPut("UpdateOneThread")]
+        public IActionResult UpdateOneThread(Product product)
+        {
+            productManager.UpdateOneThread(product);
+            return Ok($"{product} -> güncel product");
+        }
+        [HttpPut("UpdateUpdateAsync")]
+        public IActionResult UpdateAsync(Product product)
+        {
+            productManager.UpdateAsync(product);
             return Ok($"{product} -> güncel product");
         }
         [HttpGet("GetAll")]

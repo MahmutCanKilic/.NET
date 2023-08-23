@@ -41,10 +41,9 @@ namespace CodeFirstEntityFramework.Controllers
             return Ok($"{categoryText} güncellendi: {category}");
         }
         [HttpGet("GetAll")]
-        public IActionResult GetAll([FromBody]Category category)
+        public IActionResult GetAll()
         {
-
-            return Ok(manager.GetAll(category).ToList());
+            return Ok(manager.GetAll().ToList());
         }
     }
 }

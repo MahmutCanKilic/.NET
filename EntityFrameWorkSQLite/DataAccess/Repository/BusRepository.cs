@@ -33,7 +33,7 @@ namespace DataAccess.Repository
 
         public Bus FindWithId(Bus bus)
         {
-            return db.Buses.FirstOrDefault(b => b.ID == bus.ID);
+            return db.Buses.FirstOrDefault(b => b.CustomerID == bus.CustomerID);
         }
 
         public IEnumerable<Bus> GetAll()
