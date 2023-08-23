@@ -1,4 +1,5 @@
 ﻿using Business.Managers;
+using Data.Dto;
 using Data.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,28 +13,32 @@ namespace Presentation.Controllers
         private readonly ProductManager manager;
         public ValuesController(ProductManager manager)
         {
-                this.manager = manager;
+            this.manager = manager;
         }
         [HttpPost(nameof(Add))]
-        IActionResult Add(Product product)
+        public IActionResult Add(ProductCreateDto productCreateDto)
         {
+            manager.Add(productCreateDto);
             return Ok("eklendi");
         }
-        [HttpDelete(nameof(Delete))]   
-        IActionResult Delete(Product product)
+        [HttpDelete(nameof(Delete))]
+        public IActionResult Delete(string id)
         {
+            manager.Delete(id);
             return Ok("silindi");
         }
-        [HttpPut(nameof(Update))]      
-        IActionResult Update(Product product)
+        [HttpPut(nameof(Update))]
+        public IActionResult Update(ProductUpdateDto productUpdateDto)
         {
+            manager.Update(productUpdateDto);
             return Ok("Güncellendi");
         }
         [HttpGet(nameof(GetAll))]
-        IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(GetAll());
+            var result = await manager.GetAll();
+            return Ok(result);
         }
-        
+
     }
 }

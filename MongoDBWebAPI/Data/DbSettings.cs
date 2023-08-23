@@ -18,6 +18,8 @@ namespace Data
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DbName);
+            database.CreateCollection(settings.ProductsCollectionName);
+
             ProductsCollection = database.GetCollection<Product>(settings.ProductsCollectionName);
         }
     }

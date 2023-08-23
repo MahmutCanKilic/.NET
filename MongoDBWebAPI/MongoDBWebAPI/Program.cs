@@ -1,4 +1,5 @@
 
+using Business.Managers;
 using Data;
 using Data.Entity;
 using DataAccess.Repos;
@@ -18,9 +19,11 @@ namespace MongoDBWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("ProductsDatabase"));
+           // builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("ProductsDatabase"));
             builder.Services.AddScoped<DatabaseContext>();
             builder.Services.AddScoped<ProductRepository>();
+            builder.Services.AddScoped<ProductManager>();
+            builder.Services.AddScoped<DbSettings>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

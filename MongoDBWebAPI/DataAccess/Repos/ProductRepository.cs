@@ -16,9 +16,9 @@ namespace DataAccess.Repos
         {
             await db.ProductsCollection.InsertOneAsync(product);
         }
-        public async Task Delete(Product product)
+        public async Task Delete(string id)
         {
-            var filter = Builders<Product>.Filter.Eq(p => p.Id, product.Id);
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, id);
             await db.ProductsCollection.DeleteOneAsync(filter);
         }
         public async Task Update(Product product)
@@ -38,5 +38,8 @@ namespace DataAccess.Repos
 
             return result;
         }
+        public async Task<List<Product>> AddRange()
+        {
+
+        }
     }
-}
