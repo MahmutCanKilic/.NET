@@ -39,6 +39,11 @@ namespace Presentation.Controllers
             var result = await manager.GetAll();
             return Ok(result);
         }
-
+        [HttpPost(nameof(AddRange))]
+        public async Task<IActionResult> AddRange(List<ProductCreateDto> productsCreateDto)
+        {
+            await manager.AddRange(productsCreateDto);
+            return Ok(productsCreateDto);
+        }
     }
 }

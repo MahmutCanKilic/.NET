@@ -1,10 +1,11 @@
 ﻿using Data;
 using Data.Entity;
+using DataAccess.Interfaces;
 using MongoDB.Driver;
 
 namespace DataAccess.Repos
 {
-    public class ProductRepository
+    public class ProductRepository : IRepository<Product>
     {
         private readonly DatabaseContext db;
 
@@ -38,8 +39,10 @@ namespace DataAccess.Repos
 
             return result;
         }
-        public async Task<List<Product>> AddRange()
+        public async Task AddRange(List<Product> products)
         {
-
+            await db.ProductsCollection.InsertManyAsync(products);
         }
+
     }
+}
