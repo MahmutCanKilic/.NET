@@ -1,15 +1,9 @@
 
 using Business.Managers;
-using Data;
 using Data.Entity;
-using DataAccess.Interfaces;
 using DataAccess.Repos;
-using Microsoft.AspNetCore.Hosting;
-using System.Security.Cryptography.X509Certificates;
-using AutoMapper;
-using Business;
 
-namespace MongoDBWebAPI
+namespace HashingSample
 {
     public class Program
     {
@@ -23,13 +17,10 @@ namespace MongoDBWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-           // builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("ProductsDatabase"));
-            builder.Services.AddScoped<DatabaseContext>();
-            builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
-            builder.Services.AddScoped<ProductManager>();
-            builder.Services.AddScoped<DbSettings>();
+            builder.Services.AddSingleton<UserRepository>();
+            builder.Services.AddScoped<UserManager>();
 
-            builder.Services.AddAutoMapper(typeof(MapperProfile));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

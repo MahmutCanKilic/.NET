@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="asn1rtcs">
+      <HintPath>Library\asn1rtcs.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Library\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>Library\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-asic">
+      <HintPath>Library\ma3api-asic.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-asn">
+      <HintPath>Library\ma3api-asn.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-certstore">
+      <HintPath>Library\ma3api-certstore.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-certvalidation">
+      <HintPath>Library\ma3api-certvalidation.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-cmssignature">
+      <HintPath>Library\ma3api-cmssignature.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-common">
+      <HintPath>Library\ma3api-common.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-crypto">
+      <HintPath>Library\ma3api-crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-crypto-bouncyprovider">
+      <HintPath>Library\ma3api-crypto-bouncyprovider.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-infra">
+      <HintPath>Library\ma3api-infra.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-mssclient">
+      <HintPath>Library\ma3api-mssclient.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-mssclient-aveaprovider">
+      <HintPath>Library\ma3api-mssclient-aveaprovider.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-mssclient-turkcellprovider">
+      <HintPath>Library\ma3api-mssclient-turkcellprovider.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-mssclient-vodafoneprovider">
+      <HintPath>Library\ma3api-mssclient-vodafoneprovider.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-pkcs11-interop">
+      <HintPath>Library\ma3api-pkcs11-interop.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-signature">
+      <HintPath>Library\ma3api-signature.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-smartcard">
+      <HintPath>Library\ma3api-smartcard.dll</HintPath>
+    </Reference>
+    <Reference Include="ma3api-xmlsignature">
+      <HintPath>Library\ma3api-xmlsignature.dll</HintPath>
+    </Reference>
+    <Reference Include="MobilImzaYapilari">
+      <HintPath>Library\MobilImzaYapilari.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>Library\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="VodafoneMobilImza">
+      <HintPath>Library\VodafoneMobilImza.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
